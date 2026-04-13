@@ -48,11 +48,6 @@ from helper_funcs.helper_steps import (
 WEBHOOK = os.environ.get("WEBHOOK", "False") == "True"
 from config import Development as Config
 
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return "Bot is Running!"
 
 # Enable logging
 logging.basicConfig(
@@ -61,10 +56,6 @@ logging.basicConfig(
 )
 
 LOGGER = logging.getLogger(__name__)
-
-def start(update: Update, context: CallbackContext):
-    update.message.reply_text(
-        "👋 Bot is alive!",
 
 
 INPUT_PHONE_NUMBER, INPUT_TG_CODE = range(2)
@@ -257,14 +248,19 @@ def main():
     # Start the Bot
     if WEBHOOK:
         updater.start_webhook(
-    listen="0.0.0.0",
-    port=Config.PORT,
-    url_path=Config.TG_BOT_TOKEN
-)
+            listen="0.0.0.0",
+            port=Config.PORT,
+            url_path=Config.TG_BOT_TOKEN
+        )
 
-updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
+        updater.bot.set_webhook(
+            url=Config.URL + Config.TG_BOT_TOKEN
+        )
 
-updater.idle()
+    else:
+        updater.start_polling()
+
+    updater.idle()
 
 
 if __name__ == "__main__":
