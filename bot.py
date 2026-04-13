@@ -262,6 +262,9 @@ def main():
         )
         # https://t.me/MarieOT/22915
         updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
+
+        app.run(host="0.0.0.0", port=PORT)
+    
     else:
         updater.start_polling()
 
