@@ -247,21 +247,14 @@ def main():
 
     # Start the Bot
     if WEBHOOK:
-        updater.start_webhook(
-            listen="0.0.0.0",
-            port=Config.PORT,
-            url_path=Config.TG_BOT_TOKEN
-        )
+    updater.start_webhook(
+        listen="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        url_path=Config.TG_BOT_TOKEN
+    )
 
-        updater.bot.set_webhook(
-            url=Config.URL + Config.TG_BOT_TOKEN
-        )
-
-    else:
-        updater.start_polling()
-
-    updater.idle()
-
-
-if __name__ == "__main__":
-    main()
+    updater.bot.set_webhook(
+        url=Config.URL + Config.TG_BOT_TOKEN
+    )
+else:
+    updater.start_polling()
