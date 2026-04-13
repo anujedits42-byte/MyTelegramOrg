@@ -5,7 +5,7 @@ from translation import Translation
 
 class Config(object):
     # get a token from @BotFather
-    TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
+    TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8783780289:AAEF9T96ibIj3Td0aCM7GwlwmDh70_olzYw")
     # required for running on Heroku
     URL = os.environ.get("URL", "")
     PORT = int(os.environ.get("PORT", 5000))
