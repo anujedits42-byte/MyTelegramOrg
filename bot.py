@@ -47,6 +47,11 @@ from helper_funcs.helper_steps import (
 WEBHOOK = os.environ.get("WEBHOOK", "False") == "True"
 from config import Development as Config
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is Running!"
 
 # Enable logging
 logging.basicConfig(
@@ -55,6 +60,10 @@ logging.basicConfig(
 )
 
 LOGGER = logging.getLogger(__name__)
+
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "👋 Bot is alive!",
 
 
 INPUT_PHONE_NUMBER, INPUT_TG_CODE = range(2)
