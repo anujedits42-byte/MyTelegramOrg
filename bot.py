@@ -242,7 +242,7 @@ def main():
         )
 
         updater.bot.set_webhook(
-            url=f"{Config.URL}/{Config.TG_BOT_TOKEN}"
+            url=f"{Config.URL.rstrip('/')}/{Config.TG_BOT_TOKEN}"
         )
     else:
         updater.start_polling()
