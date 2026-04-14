@@ -251,11 +251,12 @@ def main():
 
     # Start the Bot
     if WEBHOOK:
+        PORT = int(os.environ.get("PORT", 5000))
+
         updater.start_webhook(
             listen="0.0.0.0",
-            port=Config.PORT,
-            url_path=Config.TG_BOT_TOKEN
-        )
+            port=PORT,
+    )
         # https://t.me/MarieOT/22915
         updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
     else:
