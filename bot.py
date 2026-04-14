@@ -44,8 +44,11 @@ from helper_funcs.helper_steps import (
     parse_to_meaning_ful_text
 )
 
-WEBHOOK = os.environ.get("WEBHOOK", "False") == "True"
-from config import Development as Config
+WEBHOOK = bool(os.environ.get("WEBHOOK", False))
+if WEBHOOK:
+    from sample_config import Config
+else:
+    from config import Development as Config
 
 
 # Enable logging
@@ -70,13 +73,14 @@ def start(update, context):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton('⚠️ disclaimer', url='https://telegram.dog/anujedits76'),
-                    InlineKeyboardButton('source 🙄', url='https://telegram.dog/anujedits76')
+                    InlineKeyboardButton('⚠️ disclaimer', url='https://telegram.me/ZauteKm/353'),
+                    InlineKeyboardButton('source 🙄', url='https://GitHub.com/ZauteKm/MyTelegramOrg')
               ],[
-                    InlineKeyboardButton('👥 goup', url='https://telegram.dog/anujeditbyak'),
-                    InlineKeyboardButton('channel 📢', url='https://telegram.dog/anujeditbyak')
+                    InlineKeyboardButton('🤖 bot lists', url='https://t.me/BotzLis'),
+                    InlineKeyboardButton('👥 goup', url='https://telegram.dog/JOSPSupport'),
+                    InlineKeyboardButton('channel 📢', url='https://t.me/JosProjects')
               ],[
-                    InlineKeyboardButton('» Subscribe Now YouTube «', url='https://youtube.com/@araftahindidubbedep')
+                    InlineKeyboardButton('» Subscribe Now YouTube «', url='https://youtube.com/c/TelegramBots')
                ]
             ]
         )
@@ -179,13 +183,14 @@ def input_tg_code(update, context):
                 reply_markup=InlineKeyboardMarkup(
                     [
                          [
-                               InlineKeyboardButton('⚠️ disclaimer', url='https://telegram.dog/anujedits76'),
-                               InlineKeyboardButton('source 🙄', url='https://telegram.dog/anujeditbyak')
+                               InlineKeyboardButton('⚠️ disclaimer', url='https://telegram.me/ZauteKm/353'),
+                               InlineKeyboardButton('source 🙄', url='https://GitHub.com/ZauteKm/MyTelegramOrg')
                        ],[
-                               InlineKeyboardButton('👥 group', url='https://telegram.dog/anujeditbyak'),
-                               InlineKeyboardButton('channel 📢', url='https://telegram.dog/anujeditbyak')
+                               InlineKeyboardButton('🤖 bot lists', url='https://telgram.dog/BotzList'),
+                               InlineKeyboardButton('👥 group', url='https://telegram.dog/JOSPSupport'),
+                               InlineKeyboardButton('channel 📢', url='https://telegram.dog/JosProjects')
                        ],[
-                               InlineKeyboardButton('» Subscribe Now YouTube «', url='https://youtube.com/@araftahindidubbedep')
+                               InlineKeyboardButton('» Subscribe Now YouTube «', url='https://youtube.com/c/TelegramBots')
                         ]
                     ]
                 )
@@ -214,39 +219,51 @@ def error(update, context):
 
 
 def main():
+    """ Initial Entry Point """
+    # Create the Updater and pass it your bot's token.
+    # Make sure to set use_context=True to use the new context based callbacks
+    # Post version 12 this will no longer be necessary
     updater = Updater(Config.TG_BOT_TOKEN, use_context=True)
-    dp = updater.dispatcher
 
+    # Get the dispatcher to register handlers
+    tg_bot_dis_patcher = updater.dispatcher
+
+    # Add conversation handler with the states
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
+
         states={
-            INPUT_PHONE_NUMBER: [
-                MessageHandler(Filters.text | Filters.contact, input_phone_number)
-            ],
-            INPUT_TG_CODE: [
-                MessageHandler(Filters.text, input_tg_code)
-            ]
+            INPUT_PHONE_NUMBER: [MessageHandler(
+                Filters.text | Filters.contact,
+                input_phone_number
+            )],
+
+            INPUT_TG_CODE: [MessageHandler(Filters.text, input_tg_code)]
         },
-        fallbacks=[CommandHandler("start", start)]
+
+        fallbacks=[CommandHandler('start', start)]
     )
 
-    dp.add_handler(conv_handler)
-    dp.add_error_handler(error)
+    tg_bot_dis_patcher.add_handler(conv_handler)
 
+    # log all errors
+    tg_bot_dis_patcher.add_error_handler(error)
+
+    # Start the Bot
     if WEBHOOK:
-        PORT = int(os.environ.get("PORT", 5000))
-
         updater.start_webhook(
             listen="0.0.0.0",
-            port=PORT,
+            port=Config.PORT,
+            url_path=Config.TG_BOT_TOKEN
         )
-
-        updater.bot.set_webhook(
-            url=f"{Config.URL.rstrip('/')}/{Config.TG_BOT_TOKEN}"
-        )
+        # https://t.me/MarieOT/22915
+        updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
     else:
         updater.start_polling()
 
+    # Run the bot until you press Ctrl-C or the process receives SIGINT,
+    # SIGTERM or SIGABRT. This should be used most of the time, since
+    # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
 
 
