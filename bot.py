@@ -44,7 +44,7 @@ from helper_funcs.helper_steps import (
     parse_to_meaning_ful_text
 )
 
-WEBHOOK = os.environ.get("WEBHOOK", "False") == "True"
+WEBHOOK = bool(os.environ.get("WEBHOOK", False))
 if WEBHOOK:
     from config import Development as Config
 
