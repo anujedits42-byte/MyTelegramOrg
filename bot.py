@@ -20,7 +20,6 @@
 import logging
 import os
 
-from flask import Flask, request
 from telegram import ParseMode
 from telegram.ext import (
     Updater,
@@ -242,7 +241,7 @@ def main():
         )
 
         updater.bot.set_webhook(
-            url=Config.URL + Config.TG_BOT_TOKEN
+            url=f"{Config.URL}/{Config.TG_BOT_TOKEN}"
         )
 
     else:
