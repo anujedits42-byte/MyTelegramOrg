@@ -234,11 +234,11 @@ def main():
     dp.add_error_handler(error)
 
     if WEBHOOK:
-        updater.start_webhook(
-            listen="0.0.0.0",
-            port=int(os.environ.get("PORT", 5000)),
-            url_path=Config.TG_BOT_TOKEN
-        )
+        PORT = int(os.environ.get("PORT", 5000))
+updater.start_webhook(
+    listen="0.0.0.0",
+    port=PORT,
+)
 
         updater.bot.set_webhook(
             url=f"{Config.URL}/{Config.TG_BOT_TOKEN}"
