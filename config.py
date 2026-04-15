@@ -5,7 +5,6 @@ from translation import Translation
 class Config(object):
     TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
     URL = os.environ.get("URL", "")
-    PORT = int(os.environ.get("PORT", 5000))
     CHUNK_SIZE = 10280
     APP_TITLE = os.environ.get(
         "APP_TITLE",
