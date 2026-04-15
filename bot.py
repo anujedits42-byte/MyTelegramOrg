@@ -20,6 +20,8 @@
 import logging
 import os
 
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from telegram import ParseMode
 from telegram.ext import (
     Updater,
