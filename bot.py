@@ -20,8 +20,6 @@
 import logging
 import os
 
-import threading
-from http.server import BaseHTTPRequestHandler, HTTPServer
 from telegram import ParseMode
 from telegram.ext import (
     Updater,
@@ -49,20 +47,6 @@ from helper_funcs.helper_steps import (
 WEBHOOK = bool(os.environ.get("WEBHOOK", False))
 if WEBHOOK:
     from config import Development as Config
-
-
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"Bot is running")
-
-def run_server():
-    PORT = int(os.environ.get("PORT", 5000))
-    server = HTTPServer(("0.0.0.0", PORT), Handler)
-    server.serve_forever()
-
-threading.Thread(target=run_server).start()
 
 
 # Enable logging
