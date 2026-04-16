@@ -77,5 +77,11 @@ class Config(object):
     )
 
 
+# ✅ MUST BE INSIDE CLASS
+    STATUS_TEXT = os.environ.get(
+        "STATUS_TEXT",
+        Translation.STATUS_TEXT
+    )
+    
 class Development(Config):
     pass
