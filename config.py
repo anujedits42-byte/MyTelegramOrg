@@ -77,12 +77,12 @@ class Config(object):
     )
 
 
-class Development(Config):
-    pass
-
-
     # ✅ FIXED: STATUS TEXT ADDED
     STATUS_TEXT = os.environ.get(
         "STATUS_TEXT",
         Translation.STATUS_TEXT
     )
+
+
+class Development(Config):
+    pass
