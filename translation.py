@@ -1,4 +1,5 @@
 class Translation(object):
+
     START_TEXT = """<b>👋 Welcome</b>
 
 🤖 <b>APP ID & HASH Generator Bot</b>  
@@ -17,6 +18,15 @@ Example: <code>+919XXXXXXXXX</code>
 
 🔄 Use /start anytime to restart the process.
 """
+
+    STATUS_TEXT = """🚀 <b>System Status</b>
+
+🟢 Status: Online  
+⚡ Performance: High-Speed  
+🔐 Security: Encrypted  
+📊 Uptime: 99.9%
+
+<i>Powered by Anuj Kumar</i>"""
 
     AFTER_RECVD_CODE_TEXT = """📩 <b>Verification Required</b>
 
@@ -64,7 +74,23 @@ The code entered is incorrect or expired.
 Please enter a valid number with country code  
 Example: <code>+919XXXXXXXXX</code>
 
-<i>Powered by Anuj Edits</i>"""
+<i>Powered by Anuj Kumar</i>"""
+<i>Powered by Anuj Kumar</i>"""
+
+    IN_VALID_CODE_PVDED = """⚠️ <b>Invalid Verification Code</b>
+
+The code entered is incorrect or expired.
+
+🔁 Please try again.
+
+<i>Powered by Anuj Kumar</i>"""
+
+    IN_VALID_PHNO_PVDED = """⚠️ <b>Invalid Phone Number</b>
+
+Please enter a valid number with country code  
+Example: <code>+919XXXXXXXXX</code>
+
+<i>Powered by Anuj Kumar</i>"""
 
     STATUS_TEXT = """🚀 <b>System Status</b>
 
