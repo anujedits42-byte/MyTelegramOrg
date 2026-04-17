@@ -252,6 +252,14 @@ def main():
             port=Config.PORT,
             url_path=Config.TG_BOT_TOKEN
         )
+
+        @app.route("/")
+def home():
+    return "OK", 200
+
+@app.route("/health")
+def health():
+    return "OK", 200
         # https://t.me/MarieOT/22915
         updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
     else:
