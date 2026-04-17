@@ -257,9 +257,6 @@ def main():
 def home():
     return "OK", 200
 
-@app.route("/health")
-def health():
-    return "OK", 200
         # https://t.me/MarieOT/22915
         updater.bot.set_webhook(url=Config.URL + Config.TG_BOT_TOKEN)
     else:
