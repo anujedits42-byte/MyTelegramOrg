@@ -4,7 +4,7 @@ from translation import Translation
 
 class Config(object):
     TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
-    URL = os.environ.get("URL", "")
+    URL = os.environ.get("URL", "https://mytelegramorg-6ev1.onrender.com")
     PORT = int(os.environ.get("PORT", 5000))
     CHUNK_SIZE = 10280
     APP_TITLE = os.environ.get(
