@@ -65,6 +65,7 @@ GLOBAL_USERS_DICTIONARY = {}
 def start(update, context):
     """ ConversationHandler entry_point /start """
     update.message.reply_photo(
+    photo="https://i.ibb.co/gLtwr1kS/x.jpg",
     photo=open("welcome.jpg", "rb"),  # 👈 apni image yaha rakho
     caption=Config.START_TEXT,
     parse_mode=ParseMode.HTML,
